@@ -10,18 +10,18 @@ goto HINT
 
 :MAKING
 if %isMake%==0 goto BUILDING
-echo Making Visual Studio version...
+echo Making third party libraries ...
 cd ../..
-rmdir generated\Keil /s /q
-cd scripts/vs_keil
+rmdir generated\ThirdParty /s /q
+cd scripts/ThirdParty
 @echo on
-cmake ../../CMakeLists.txt -B../../generated/Keil -G "Visual Studio 17 2022" -A Win32 -DCMAKE_BUILD_TYPE=Debug
+cmake ../../VS/ThirdParty/wxWidgets/CMakeLists.txt -B../../generated/ThirdParty  -G "Visual Studio 17 2022" -A Win32 -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON -DwxBUILD_SAMPLES=ALL
 @echo off
 
 :BUILDING
 if %isBuild%==0 goto EXIT
 @echo on
-MSBuild.exe ../../generated/Keil/RES-Network.sln -clp:ErrorsOnly;WarningsOnly -nologo /m
+MSBuild.exe ../../generated/ThirdParty/wxWidgets.sln -clp:ErrorsOnly;WarningsOnly -nologo /m
 @echo off
 goto EXIT
 
