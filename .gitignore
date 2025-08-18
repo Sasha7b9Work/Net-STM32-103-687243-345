@@ -1,5 +1,7 @@
 archive.zip
 
+sources/generated/*
+
 sources/Device/DebugConfig/*
 sources/Device/Listings/*
 sources/Device/Listings-Debug/*

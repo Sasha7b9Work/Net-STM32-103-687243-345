@@ -26,8 +26,6 @@ bool CG_Anem::GetMeasure(float *velocity_out)
         return false;
     }
 
-    timeNext += (uint)TIME_MEASURE + (uint)(std::rand() % 100);
-
 #ifdef IN_MODE_TEST
 
     *velocity_out = (float)(std::rand() % 10000) / 100.0f;
@@ -65,6 +63,11 @@ bool CG_Anem::GetMeasure(float *velocity_out)
     if (result)
     {
         *velocity_out = velocity.half_word[0] * 0.1f;
+    }
+
+    if (result)
+    {
+        timeNext += (uint)TIME_MEASURE + (uint)(std::rand() % 100);
     }
 
     return result;

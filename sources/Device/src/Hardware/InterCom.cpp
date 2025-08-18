@@ -17,6 +17,33 @@
 
 namespace InterCom
 {
+    // Преобразуем тип измерения в правильное значение, которое воспринимает последняя версия Network-PC
+    static uint8 CodeType(TypeMeasure::E type)
+    {
+        if (type == TypeMeasure::Pressure)
+        {
+            return 1;
+        }
+        else if (type == TypeMeasure::Illumination)
+        {
+            return 9;
+        }
+        else if (type == TypeMeasure::Temperature)
+        {
+            return 0;
+        }
+        else if (type == TypeMeasure::Humidity)
+        {
+            return 2;
+        }
+        else if (type == TypeMeasure::Velocity)
+        {
+            return 4;
+        }
+
+        return (uint8)type;
+    }
+
     /*
     *  Формат сообщения.
     *  0       - 'A'
@@ -37,7 +64,7 @@ namespace InterCom
         message[0] = 'A';
         message[1] = 'B';
         message[2] = 'C';
-        message[3] = (uint8)type;
+        message[3] = CodeType(type);
 
         uint id = Settings::GetID();
 

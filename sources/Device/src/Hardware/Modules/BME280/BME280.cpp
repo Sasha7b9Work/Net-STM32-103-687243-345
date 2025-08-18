@@ -53,8 +53,6 @@ bool BME280::GetMeasures(float* temp, float* pressure, float* humidity)
         return false;
     }
 
-    timeNext += (uint)TIME_MEASURE + (uint)(std::rand() % 100);
-
 #ifdef IN_MODE_TEST
 
     static float value = 1.1f;
@@ -86,6 +84,8 @@ bool BME280::GetMeasures(float* temp, float* pressure, float* humidity)
         *temp = (float)comp_data.temperature;
         *pressure = (float)comp_data.pressure / 100.0f;
         *humidity = (float)comp_data.humidity;
+
+        timeNext += (uint)TIME_MEASURE + (uint)(std::rand() % 100);
     }
 
     return (result == BME280_OK);
