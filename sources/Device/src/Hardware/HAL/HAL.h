@@ -45,6 +45,9 @@ namespace HAL
     void Init();
 
     void Delay(unsigned int timeMS);
+
+    // Возврщает время до следующего измерения
+    uint GetDeltaMeasures();
 }
 
 

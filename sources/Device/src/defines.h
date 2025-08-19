@@ -29,10 +29,6 @@ typedef const char *pchar;
 typedef unsigned char uchar;
 
 
-// Промежуток между измерениями
-#define TIME_MEASURE  500
-
-
 #ifdef WIN32
 //    #define IN_MODE_TEST
     #undef asm

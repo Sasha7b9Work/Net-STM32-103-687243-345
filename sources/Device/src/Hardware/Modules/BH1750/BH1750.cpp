@@ -71,11 +71,9 @@ bool BH1750::GetMeasure(float *illumination)
     {
         float value = (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f * (69.0f / 31.0f);
 
-//        float value = (float)(result.byte[1] | (result.byte[0] << 8)) / 1.2f;
-
         *illumination = value;
 
-        timeNext += (uint)TIME_MEASURE + (uint)(std::rand() % 100);
+        timeNext += HAL::GetDeltaMeasures();
 
         return true;
     }

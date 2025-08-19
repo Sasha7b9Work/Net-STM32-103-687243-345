@@ -2,7 +2,9 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/CDC/CDC.h"
+#include "Settings/Settings.h"
 #include <stm32f1xx_hal.h>
+#include <cstdlib>
 
 
 static void SystemClock_Config();
@@ -63,6 +65,12 @@ static void SystemClock_Config()
     PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
 
     HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit);
+}
+
+
+uint HAL::GetDeltaMeasures()
+{
+    return 500 + ((std::rand() + Settings::GetID()) % 100);
 }
 
 

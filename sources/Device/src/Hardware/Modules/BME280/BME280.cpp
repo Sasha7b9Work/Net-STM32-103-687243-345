@@ -85,7 +85,7 @@ bool BME280::GetMeasures(float* temp, float* pressure, float* humidity)
         *pressure = (float)comp_data.pressure / 100.0f;
         *humidity = (float)comp_data.humidity;
 
-        timeNext += (uint)TIME_MEASURE + (uint)(std::rand() % 100);
+        timeNext += HAL::GetDeltaMeasures();
     }
 
     return (result == BME280_OK);
