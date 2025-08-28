@@ -44,17 +44,6 @@ namespace InterCom
         return (uint8)type;
     }
 
-    /*
-    *  Формат сообщения.
-    *  0       - 'A'
-    *  1       - 'B'
-    *  2       - 'C'
-    *  3       - type
-    *  4...7   - ID
-    *  8...11  - hash[12...15]
-    *  12...15 - value
-    */
-
     Direction::E direction = Direction::_None;
 
     Buffer<uint8, 16> CreateMessage(TypeMeasure::E type, float value)
@@ -68,13 +57,13 @@ namespace InterCom
 
         uint id = Settings::GetID();
 
-        std::memcpy(&message[4], &id, 4);
+        std::memcpy(&message[4], &id, sizeof(id));
 
-        std::memcpy(&message[12], &value, 4);
+        std::memcpy(&message[8], &value, sizeof(id));
 
-        uint hash = Math::CalculateHash(&value, 4);
+        uint hash = Math::CalculateHash(&message[0], 12);
 
-        std::memcpy(&message[8], &hash, 4);
+        std::memcpy(&message[12], &hash, sizeof(hash));
 
         return message;
     }
